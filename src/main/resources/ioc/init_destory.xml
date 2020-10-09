@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <!--spring中通过配置init-method和destroy-method方法来实现Bean的初始化和销毁时附加的操作
+      在构造函数之后，也就是bean被实例化之后会立刻执行init-method方法
+      应用上下文容器关闭时会执行destroy-method方法，只适用于单例
+    -->
+
+
+    <!--多例模式 destroy-method方法不会被执行-->
+    <bean id="skirt" class="com.demo.ioc.init_destory.Skirt" init-method="init" destroy-method="destory"
+          scope="prototype" ></bean>
+
+
+    <bean id="stage" class="com.demo.ioc.init_destory.Stage" lazy-init="true" init-method="turnOnLight"
+          destroy-method="turnOffLight"></bean>
+
+</beans>
