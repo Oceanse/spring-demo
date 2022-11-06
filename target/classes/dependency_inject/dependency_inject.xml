@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <!--Setter方法注入基本类型和对象类型属性-->
+    <bean id="person" class="com.demo.dependency_inject.demo1.Student" lazy-init="true">
+        <property name="name" value="ocean2"></property>
+        <property name="id" value="15721167"></property>
+        <property name="book" ref="book"></property>
+    </bean>
+
+    <!---Setter方法注入List Array Map等复杂属性-->
+    <bean id="book" class="com.demo.dependency_inject.demo1.Book" lazy-init="true">
+        <property name="title" value="Crazy java"></property>
+
+        <property name="language">
+            <list>
+                <value>chinese</value>
+                <value>english</value>
+            </list>
+        </property>
+        <property name="contents">
+            <map>
+                <entry key="chapter1" value="introduction"/>
+                <entry key="chapter2" value="basic knowledge"/>
+                <entry key="chapter3" value="oop"/>
+            </map>
+        </property>
+    </bean>
+
+
+
+
+
+
+
+
+    <!--构造器注入属性，可以按照参数索引、类型、名称指定构造器参数进行注入依赖-->
+    <!-- 通过构造器参数索引方式依赖注入 -->
+    <bean id="computerByIndex" class="com.demo.dependency_inject.demo2.Computer" lazy-init="true">
+        <constructor-arg index="0" value="lennovo"/>
+        <constructor-arg index="1" value="3000"/>
+    </bean>
+    <!-- 通过构造器参数类型方式依赖注入 -->
+    <bean id="computerByType" class="com.demo.dependency_inject.demo2.Computer" lazy-init="true">
+        <constructor-arg type="java.lang.String" value="HP"/>
+        <constructor-arg type="double" value="4000"/>
+    </bean>
+    <!-- 通过构造器参数名称方式依赖注入 -->
+    <bean id="computerByName" class="com.demo.dependency_inject.demo2.Computer" lazy-init="true">
+        <constructor-arg name="brand" value="Mac"/>
+        <constructor-arg name="price" value="6000"/>
+    </bean>
+
+
+
+
+
+
+
+    <!--松耦合，并不是不要耦合。A类依赖B类，A类和B类之间存在紧密耦合
+        如果把依赖关系变为A类依赖B的父类B0类，A类就可使用B0类的任意子类，于是就成为了面向接口编程
+        A类可使用B0类的任意子类，A类与B0类的子类之间的依赖关系是松耦合的。
+        传入具体哪个武器类，可以在外部xml文件中配置
+    -->
+
+    <bean id="sword" class="com.demo.dependency_inject.demo3.weapon.Sword" lazy-init="true"></bean>
+    <bean id="gun" class="com.demo.dependency_inject.demo3.weapon.Gun" lazy-init="true"></bean>
+    <bean id="solider" class="com.demo.dependency_inject.demo3.Solider" lazy-init="true">
+        <property name="weapon" ref="sword"></property>
+    </bean>
+
+
+
+
+
+</beans>

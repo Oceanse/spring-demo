@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <!--IoC（Inversion of Control ）代表控制反转，Spring框架本质上是一个IoC容器。,Spring框架就把创建类实例的行为从类中拿出来放到Spring框架里去做,
+    由框架控制所有类的实例创建，这就是“控制反转”-->
+
+
+    <!--无参构造实例化bean-->
+    <bean id="construct" class="com.demo.ioc.produce_bean.Mouse" lazy-init="true"></bean>
+
+
+    <!--静态工厂实例化bean-->
+    <bean id="staticBeanfact" class="com.demo.ioc.produce_bean.StaticFactory" factory-method="getMouse" lazy-init="true" ></bean>
+
+
+    <!--实例工厂实例化bean-->
+    <bean id="instanceBean" class="com.demo.ioc.produce_bean.InstanceFactory"></bean>
+    <bean id="instanceBeanfact" factory-bean="instanceBean" factory-method="getMouse" lazy-init="true" ></bean>
+
+
+    <!--mouseFactory是一个工厂bean, 它可以返回其方法里面定义的bean类型-->
+    <bean id="mouseFactory" class="com.demo.ioc.produce_bean.MouseFactory"></bean>
+</beans>
