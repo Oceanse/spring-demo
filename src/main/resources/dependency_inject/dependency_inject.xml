@@ -7,7 +7,7 @@
 
 
     <!--Setter方法注入基本类型和对象类型属性-->
-    <bean id="person" class="com.demo.dependency_inject.demo1.Student" lazy-init="true">
+    <bean id="student" class="com.demo.dependency_inject.demo1.Student" lazy-init="true">
         <property name="name" value="ocean2"></property>
         <property name="id" value="15721167"></property>
         <property name="book" ref="book"></property>
@@ -16,7 +16,6 @@
     <!---Setter方法注入List Array Map等复杂属性-->
     <bean id="book" class="com.demo.dependency_inject.demo1.Book" lazy-init="true">
         <property name="title" value="Crazy java"></property>
-
         <property name="language">
             <list>
                 <value>chinese</value>
@@ -31,12 +30,6 @@
             </map>
         </property>
     </bean>
-
-
-
-
-
-
 
 
     <!--构造器注入属性，可以按照参数索引、类型、名称指定构造器参数进行注入依赖-->
@@ -57,11 +50,6 @@
     </bean>
 
 
-
-
-
-
-
     <!--松耦合，并不是不要耦合。A类依赖B类，A类和B类之间存在紧密耦合
         如果把依赖关系变为A类依赖B的父类B0类，A类就可使用B0类的任意子类，于是就成为了面向接口编程
         A类可使用B0类的任意子类，A类与B0类的子类之间的依赖关系是松耦合的。
@@ -74,8 +62,36 @@
         <property name="weapon" ref="sword"></property>
     </bean>
 
+    <!--内部bean: 当一个bean仅被用作另一个bean的属性时，可以声明为一个内部bean,最终也是通过set方法注入-->
+    <bean id="person" class="com.demo.dependency_inject.demo4.Person" lazy-init="true">
+        <property name="name" value="ocean"></property>
+        <property name="age" value="33"></property>
+        <property name="computer">
+            <!--inner bean-->
+            <bean class="com.demo.dependency_inject.demo4.Computer">
+                <property name="brand" value="MacBook 14pro"/>
+                <property name="price" value="16000"/>
+            </bean>
+        </property>
+    </bean>
 
+    <!--按名称自动装配,本质也是set方法注入-->
+    <bean id="person2" class="com.demo.dependency_inject.demo4.Person" autowire="byName" lazy-init="true">
+        <property name="name" value="phy"></property>
+        <property name="age" value="33"></property>
+    </bean>
 
+    <!--按类型自动装配，本质也是set方法注入；
+    如果使用了根据类型来自动装配，那么在IOC容器中只能有一个这样的类型，否则就会报错！-->
+    <bean id="person3" class="com.demo.dependency_inject.demo4.Person" autowire="byType" lazy-init="true">
+        <property name="name" value="phy"></property>
+        <property name="age" value="33"></property>
+    </bean>
 
+    <!--这里的id要和Person类中的computer属性名一致， 才能实现按名称自动装配-->
+    <bean id="computer" class="com.demo.dependency_inject.demo4.Computer" lazy-init="true">
+        <property name="brand" value="alien"/>
+        <property name="price" value="20000"/>
+    </bean>
 
 </beans>

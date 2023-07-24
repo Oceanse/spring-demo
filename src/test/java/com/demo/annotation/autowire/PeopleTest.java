@@ -1,6 +1,5 @@
 package com.demo.annotation.autowire;
 
-import com.demo.annotation.autowire.People;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.testng.annotations.Test;
@@ -12,6 +11,6 @@ public class PeopleTest {
 
         People people = applicationContext.getBean("people", People.class);
         people.showCellphone();
-
     }
+
 }

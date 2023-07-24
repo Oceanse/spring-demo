@@ -1,6 +1,6 @@
 package com.demo.jdbc_template.XmlConfig_Datasource;
 
-import com.demo.jdbc_template.CodeConfig_DataSource.MyRowMapper;
+import com.demo.jdbc_template.CodeConfig_DataSource.PhoneRowMapper;
 import com.demo.jdbc_template.dto.Phone;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -40,7 +40,7 @@ public class default_c3p0_pool_Test {
         String querySql = "select * from phoneTable";
 
         //第一个参数是sql语句，第二个是接口RowMapper,需要自己实现接口
-        List<Phone> phones = jdbcTemplate.query(querySql, new MyRowMapper());
+        List<Phone> phones = jdbcTemplate.query(querySql, new PhoneRowMapper());
         System.out.println(phones);
     }
 

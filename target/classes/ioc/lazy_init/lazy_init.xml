@@ -6,21 +6,26 @@
                            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <!--
-    懒加载机制只对单例bean有作用，对于多例bean设置懒加载没有意义
-    默认情况下(不设置lazy-init=true/false), 单例bean在创建spring容器（框架）启动时就会马上创建的(非懒加载，实时加载)
-     如果设置lazy-init=true， 单例bean在创建spring容器启动时不会被创建，只在调用getBean方法时候才会被实例化
+    单例：
+    默认情况下，单例bean在创建spring容器（框架）启动时就会被马上创建
+    单例显式设置lazy-init=true， 单例bean在创建spring容器启动时不会被创建，只在使用时候才会被实例化，也就是懒创建
+
+    多例：只能是懒创建
+    懒加载机制只对单例bean有作用，对于多例bean设置懒加载没有意义，多例bean只能是懒创建，也就是在使用时候会被创建
     -->
 
 
-    <!--验证懒加载机制-->
-    <bean id="clothes" class="com.demo.ioc.lazy_init.Clothes"></bean><!--单例快加载-->
+    <!--单例默认快加载-->
+    <bean id="clothes" class="com.demo.ioc.lazy_init.Clothes"></bean>
 
-    <bean id="coat" class="com.demo.ioc.lazy_init.Coat" lazy-init="true"></bean><!--默认单例，但明确懒加载-->
+    <!--单例，显式设置成懒加载-->
+    <bean id="coat" class="com.demo.ioc.lazy_init.Coat" lazy-init="true"></bean>
 
-    <bean id="pants" class="com.demo.ioc.lazy_init.Pants" scope="prototype"></bean><!--多例默认懒加载-->
+    <!--多例默认且只能是懒加载-->
+    <bean id="pants" class="com.demo.ioc.lazy_init.Pants" scope="prototype"></bean>
 
 
-    <!--lazy-init仅仅在scope属性为singleton时，才会有效，如果scope的属性值为pototype，那么即使设置了lazy-init="false",容器启动时也不会被实例化，而是调用getBean方法实例化-->
+    <!--lazy-init仅仅在scope属性为singleton时，才会有效，如果scope的属性值为prototype，那么即使设置了lazy-init="false",容器启动时bean也不会被实例化，而是调用getBean方法实例化-->
     <bean id="hat" class="com.demo.ioc.lazy_init.Hat" scope="prototype" lazy-init="false"></bean>
 
 </beans>

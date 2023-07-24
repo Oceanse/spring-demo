@@ -13,7 +13,7 @@ public class IocTest {
     @Test
     public void constructTest(){
         ApplicationContext context=new ClassPathXmlApplicationContext("ioc/produce_bean/Ioc.xml");
-        Mouse mouse=(Mouse) context.getBean("construct");
+        Mouse mouse=(Mouse) context.getBean("mouseByEmptyConstruct");
         mouse.show();
     }
 
@@ -24,7 +24,7 @@ public class IocTest {
     @Test
     public void staticFactTest(){
     ApplicationContext context = new ClassPathXmlApplicationContext("ioc/produce_bean/Ioc.xml");
-        Mouse m = (Mouse)context.getBean("staticBeanfact");
+        Mouse m = (Mouse)context.getBean("mouseByStaticFactory");
         m.show();
     }
 
@@ -35,7 +35,7 @@ public class IocTest {
     @Test
     public void instanceFactTest(){
         ApplicationContext context = new ClassPathXmlApplicationContext("ioc/produce_bean/Ioc.xml");
-        Mouse m = (Mouse)context.getBean("instanceBeanfact");
+        Mouse m = (Mouse)context.getBean("mouseByInstanceFactory");
         m.show();
     }
 
@@ -46,7 +46,7 @@ public class IocTest {
     @Test
     public void factBeanTest(){
         ApplicationContext context = new ClassPathXmlApplicationContext("ioc/produce_bean/Ioc.xml");
-        Mouse m = (Mouse)context.getBean("mouseFactory");
+        Mouse m = (Mouse)context.getBean("mouseByFactoryBean");
         m.show();
     }
 }

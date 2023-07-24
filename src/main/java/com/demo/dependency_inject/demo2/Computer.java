@@ -12,7 +12,7 @@ public class Computer {
     }
 
     public Computer(String brand, double price) {
-        System.out.println("MouseFactory(String brand, double price) is called");
+        System.out.println("Computer(String brand, double price) is called");
         this.brand = brand;
         this.price = price;
     }

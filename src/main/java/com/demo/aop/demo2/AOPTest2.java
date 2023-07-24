@@ -10,8 +10,16 @@ public class AOPTest2 {
     public void testPointcut(){
         ApplicationContext context =
                 new ClassPathXmlApplicationContext("aop/springaop.xml");
-        Landlord landlord = context.getBean("landlord", Landlord.class);
+        Landlord2 landlord = context.getBean("landlord2", Landlord2.class);
         landlord.service();
+    }
+
+    @Test
+    public void testPointcut2(){
+        ApplicationContext context =
+                new ClassPathXmlApplicationContext("aop/springaop.xml");
+        Landlord2 landlord = context.getBean("landlord2", Landlord2.class);
+        landlord.service2();
     }
 
 }

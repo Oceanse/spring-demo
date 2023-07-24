@@ -27,7 +27,7 @@ public class JDBC_TemplateTest {
         //设置数据库信息
         DriverManagerDataSource ds = new DriverManagerDataSource();
         ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        ds.setUrl("jdbc:mysql://192.168.56.102:3306/phone?useSSL=false");
+        ds.setUrl("jdbc:mysql://172.16.12.128:3306/phone?useSSL=false");
         ds.setUsername("root");
         ds.setPassword("123123");
         jdbcTemplate = new JdbcTemplate(ds);
@@ -44,7 +44,7 @@ public class JDBC_TemplateTest {
         String querySql = "select * from phoneTable";
 
         //第一个参数是sql语句，第二个是接口RowMapper,需要自己实现接口
-        List<Phone> phones = jdbcTemplate.query(querySql, new MyRowMapper());
+        List<Phone> phones = jdbcTemplate.query(querySql, new PhoneRowMapper());
         System.out.println(phones);
     }
 

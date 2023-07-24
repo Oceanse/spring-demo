@@ -3,6 +3,7 @@ package com.demo.depency_inject;
 import com.demo.dependency_inject.demo2.Computer;
 import com.demo.dependency_inject.demo1.Student;
 import com.demo.dependency_inject.demo3.Solider;
+import com.demo.dependency_inject.demo4.Person;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.testng.annotations.Test;
@@ -16,8 +17,8 @@ public class DITest {
     @Test
     public void test() {
         ApplicationContext context = new ClassPathXmlApplicationContext("dependency_inject/dependency_inject.xml");
-        Student person = context.getBean("person", Student.class);
-        System.out.println(person);
+        Student student = context.getBean("student", Student.class);
+        System.out.println(student);
     }
 
 
@@ -30,9 +31,36 @@ public class DITest {
         Computer c1 = context.getBean("computerByIndex", Computer.class);
         Computer c2 = context.getBean("computerByType", Computer.class);
         Computer c3 = context.getBean("computerByName", Computer.class);
-        System.out.println(c1.toString());
-        System.out.println(c2.toString());
-        System.out.println(c3.toString());
+        System.out.println(c1);
+        System.out.println(c2);
+        System.out.println(c3);
+    }
+
+
+    /**
+     * 内部bean: 当一个bean仅被用作另一个bean的属性时，可以声明为一个内部bean
+     */
+    @Test
+    public void test3() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("dependency_inject/dependency_inject.xml");
+        Person person = context.getBean("person", Person.class);
+        System.out.println(person);
+    }
+
+
+    @Test
+    public void test4() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("dependency_inject/dependency_inject.xml");
+        Person person = context.getBean("person2", Person.class);
+        System.out.println(person);
+    }
+
+
+    @Test
+    public void test5() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("dependency_inject/dependency_inject.xml");
+        Person person = context.getBean("person3", Person.class);
+        System.out.println(person);
     }
 
 
@@ -42,7 +70,7 @@ public class DITest {
      * 传入具体哪个武器类，可以在外部xml文件中配置，
      */
     @Test
-    public void test3() {
+    public void test6() {
         ApplicationContext context = new ClassPathXmlApplicationContext("dependency_inject/dependency_inject.xml");
         Solider solider = context.getBean("solider", Solider.class);
         solider.play();

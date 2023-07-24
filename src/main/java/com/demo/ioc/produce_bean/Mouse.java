@@ -6,11 +6,11 @@ package com.demo.ioc.produce_bean;
  */
 public class Mouse {
     public Mouse() {
-        System.out.println("空参构造方法 Mouse() is invoked");
+        System.out.println("空参构造方法 Mouse() 被调用");
     }
 
     public void show() {
-        System.out.println("mouse....");
+        System.out.println("logitech anywhere 3");
     }
 
 }

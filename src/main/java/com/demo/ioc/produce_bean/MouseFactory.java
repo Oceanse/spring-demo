@@ -18,7 +18,8 @@ public class MouseFactory implements FactoryBean<Mouse> {
      * @throws Exception
      */
     @Override
-    public Mouse getObject() throws Exception {
+    public Mouse getObject(){
+        System.out.println("MouseFactory.getObject() 被调用");
         return new Mouse();
     }
 

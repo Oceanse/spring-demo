@@ -1,6 +1,5 @@
 package com.demo.dependency_inject.demo1;
 
-import java.util.List;
 
 public class Student {
     String name = "ocean";
@@ -28,6 +27,12 @@ public class Student {
         this.book = book;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "Student{" +
+                "name='" + name + '\'' +
+                ", id=" + id +
+                ", book=" + book +
+                '}';
+    }
 }
