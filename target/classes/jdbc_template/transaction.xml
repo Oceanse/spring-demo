@@ -37,8 +37,6 @@
     <tx:annotation-driven transaction-manager="txManager"/>
 
 
-
-
 <!--    &lt;!&ndash;2.配置如何管理事务&ndash;&gt;-->
 <!--    <tx:advice id="txAdvice" transaction-manager="txManager">-->
 
@@ -55,6 +53,6 @@
 <!--        <aop:advisor advice-ref="txAdvice" pointcut-ref="pt"></aop:advisor>-->
 <!--    </aop:config>-->
 
-<!--    &lt;!&ndash;开启Aspect，生成代理对象&ndash;&gt;-->
+    <!--开启Aspect，生成代理对象-->
 <!--    <aop:aspectj-autoproxy/>-->
 </beans>
