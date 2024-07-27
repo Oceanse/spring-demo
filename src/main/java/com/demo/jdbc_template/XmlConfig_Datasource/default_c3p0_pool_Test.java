@@ -1,7 +1,7 @@
 package com.demo.jdbc_template.XmlConfig_Datasource;
 
 import com.demo.jdbc_template.CodeConfig_DataSource.PhoneRowMapper;
-import com.demo.jdbc_template.dto.Phone;
+import com.demo.jdbc_template.entity.Phone;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.testng.annotations.BeforeTest;

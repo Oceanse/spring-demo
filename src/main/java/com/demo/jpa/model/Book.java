@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Book {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)//使用数据库的自增列来生成主键值,数据库会自动为每个新插入的记录分配一个唯一的主键值。这意味着不需要手动设置主键的值，数据库会自动处理主键的生成。
     private Long id;
 
     private String title;

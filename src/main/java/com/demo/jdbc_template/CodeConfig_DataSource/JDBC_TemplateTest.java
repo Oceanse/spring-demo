@@ -1,6 +1,6 @@
 package com.demo.jdbc_template.CodeConfig_DataSource;
 
-import com.demo.jdbc_template.dto.Phone;
+import com.demo.jdbc_template.entity.Phone;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.testng.annotations.BeforeTest;
@@ -22,8 +22,12 @@ import java.util.List;
 public class JDBC_TemplateTest {
     JdbcTemplate jdbcTemplate;
 
+    /**
+     * DriverManagerDataSource 是 Spring Framework 中提供的一个 DataSource 的具体实现类。
+     * 不是连接池数据源，它每次请求都会创建一个新的数据库连接，适用于开发和测试，但不适合在生产环境中使用
+     */
     @BeforeTest
-    public void test() {
+    public void preSetup() {
         //设置数据库信息
         DriverManagerDataSource ds = new DriverManagerDataSource();
         ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
@@ -33,20 +37,6 @@ public class JDBC_TemplateTest {
         jdbcTemplate = new JdbcTemplate(ds);
     }
 
-
-    /**
-     * 查
-     */
-    @Test
-    public void testQuery() {
-
-        //统计所有记录数量
-        String querySql = "select * from phoneTable";
-
-        //第一个参数是sql语句，第二个是接口RowMapper,需要自己实现接口
-        List<Phone> phones = jdbcTemplate.query(querySql, new PhoneRowMapper());
-        System.out.println(phones);
-    }
 
 
     /**
@@ -68,6 +58,23 @@ public class JDBC_TemplateTest {
         jdbcTemplate.update(insertsql, brand, price);
         jdbcTemplate.update(insertsql, brand2, price2);
     }
+
+
+    /**
+     * 查
+     */
+    @Test
+    public void testQuery() {
+
+        //统计所有记录数量
+        String querySql = "select * from phoneTable";
+
+        //第一个参数是sql语句，第二个是接口RowMapper,需要自己实现接口
+        List<Phone> phones = jdbcTemplate.query(querySql, new PhoneRowMapper());
+        System.out.println(phones);
+    }
+
+
 
 
     /**

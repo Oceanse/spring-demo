@@ -12,7 +12,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import javax.transaction.Transactional;
 import java.util.List;
 
-//这种写法是为了让测试在Spring容器环境下执行。
+
+/**
+ * 使用Spring框架和JUnit进行集成测试的，让测试在Spring容器环境下执行
+ * SpringJUnit4ClassRunner是Spring框架提供的一个特殊的运行器，它允许你在JUnit测试中加载Spring的上下文环境
+ * ContextConfiguration配置Spring的应用上下文,配置文件通常包含了Spring bean的定义和配置信息
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:jpa/applicationContext.xml")
 public class JPQLTest {
@@ -22,7 +27,7 @@ public class JPQLTest {
     @Test
     public void testFindAll(){
         List<Book> allBooks = bookRepository.findAllBooksWithJPQL();
-        System.out.println(allBooks);
+        System.out.println("allBooks = " + allBooks);
     }
 
     /*

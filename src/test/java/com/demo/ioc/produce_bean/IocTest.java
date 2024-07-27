@@ -6,7 +6,6 @@ import org.testng.annotations.Test;
 
 public class IocTest {
 
-
     /**
      * 空参构造创建对象
      */

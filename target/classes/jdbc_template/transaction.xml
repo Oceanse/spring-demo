@@ -10,12 +10,10 @@
      http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
      http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
+    <!--扫描注解-->
+    <context:component-scan base-package="com.demo"/>
 
     <context:property-placeholder location="classpath:jdbc_template/jdbc.properties"/>
-
-    <bean id="accountService" class="com.demo.jdbc_template.transaction.AccountService">
-    </bean>
-
     <!-- 配置druid连接池 -->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
         <property name="driverClassName" value="${jdbc.driver}"/>
@@ -38,26 +36,25 @@
     <!--开启以注解的方式实现事务控制-->
     <tx:annotation-driven transaction-manager="txManager"/>
 
-    <!--扫描注解-->
-    <context:component-scan base-package="com.demo"/>
 
 
-    <!--2.配置如何管理事务-->
-    <tx:advice id="txAdvice" transaction-manager="txManager">
 
-        <!--配置事务的属性-->
-        <tx:attributes>
-            <!--所有的方法，并不是只读-->
-            <tx:method name="*" read-only="false"/>
-        </tx:attributes>
-    </tx:advice>
+<!--    &lt;!&ndash;2.配置如何管理事务&ndash;&gt;-->
+<!--    <tx:advice id="txAdvice" transaction-manager="txManager">-->
 
-    <!--3.配置拦截哪些方法+事务的属性-->
-    <aop:config>
-        <aop:pointcut id="pt" expression="execution(* com.demo.jdbc_template.transaction.TransactionTest.*(..) )"/>
-        <aop:advisor advice-ref="txAdvice" pointcut-ref="pt"></aop:advisor>
-    </aop:config>
+<!--        &lt;!&ndash;配置事务的属性&ndash;&gt;-->
+<!--        <tx:attributes>-->
+<!--            &lt;!&ndash;所有的方法，并不是只读&ndash;&gt;-->
+<!--            <tx:method name="*" read-only="false"/>-->
+<!--        </tx:attributes>-->
+<!--    </tx:advice>-->
 
-    <!--开启Aspect，生成代理对象-->
-    <aop:aspectj-autoproxy/>
+<!--    &lt;!&ndash;3.配置拦截哪些方法+事务的属性&ndash;&gt;-->
+<!--    <aop:config>-->
+<!--        <aop:pointcut id="pt" expression="execution(* com.demo.jdbc_template.transaction.TransactionTest.*(..) )"/>-->
+<!--        <aop:advisor advice-ref="txAdvice" pointcut-ref="pt"></aop:advisor>-->
+<!--    </aop:config>-->
+
+<!--    &lt;!&ndash;开启Aspect，生成代理对象&ndash;&gt;-->
+<!--    <aop:aspectj-autoproxy/>-->
 </beans>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <!--spring中通过配置init-method和destroy-method方法来实现Bean的初始化和销毁时附加的操作
+      执行顺序：
+      1 构造器(IOC)
+      2 set方法(DI)
+      3 init方法
+      4 业务方法
+      5 destroy方法
+    -->
+
+
+    <bean id="employeeManager" class="com.demo.ioc.lifecycle.EmployeeManager"
+          init-method="init"
+          destroy-method="cleanup">
+        <property name="id" value="001"></property>
+    </bean>
+
+</beans>

@@ -18,8 +18,8 @@
 
 
     <!--实例工厂实例化bean-->
-    <bean id="instanceBean" class="com.demo.ioc.produce_bean.InstanceFactory" lazy-init="true"></bean>
-    <bean id="mouseByInstanceFactory" factory-bean="instanceBean" factory-method="getMouse" lazy-init="true"></bean>
+    <bean id="factoryBean" class="com.demo.ioc.produce_bean.InstanceFactory" lazy-init="true"></bean>
+    <bean id="mouseByInstanceFactory" factory-bean="factoryBean" factory-method="getMouse" lazy-init="true"></bean>
 
 
     <!--mouseFactory是一个工厂bean, 它可以返回其方法里面定义的bean类型-->

@@ -1,33 +1,33 @@
 package com.demo.jdbc_template.transaction;
 
 import com.demo.jdbc_template.CodeConfig_DataSource.AccountRowMapper;
-import com.demo.jdbc_template.dto.Account;
+import com.demo.jdbc_template.entity.Account;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import javax.transaction.Transactional;
 import java.util.List;
 
+
 @Service
-@Transactional
 public class AccountService {
 
 
     /**
      * 先插入两条测试数据
      */
+    @Test
     public void insert() {
         ClassPathXmlApplicationContext classPathXmlApplicationContext =
                 new ClassPathXmlApplicationContext("jdbc_template/transaction.xml");
         JdbcTemplate jdbcTemplate = classPathXmlApplicationContext.getBean("jdbcTemplate", JdbcTemplate.class);
-        int id = 3;
+        int id = 1;
         String name = "xm2";
         double balance = 1000;
 
-        int id2 = 4;
+        int id2 = 2;
         String name2 = "xh2";
         double balance2 = 1000;
 
@@ -39,9 +39,11 @@ public class AccountService {
     }
 
 
-
-
-
+    /**
+     * 测试发现事务不生效
+     */
+    @Test
+    @Transactional
     public void transfer(){
         ClassPathXmlApplicationContext classPathXmlApplicationContext =
                 new ClassPathXmlApplicationContext("jdbc_template/transaction.xml");

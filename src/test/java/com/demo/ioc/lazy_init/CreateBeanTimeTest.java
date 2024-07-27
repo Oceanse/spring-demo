@@ -31,7 +31,7 @@ public class CreateBeanTimeTest {
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("ioc/lazy_init/lazy_init.xml");
 
         //通过id获取容器中的Pants对象，此时才会创建Pants对象
-        Pants pants = applicationContext.getBean("pants", Pants.class);
+        applicationContext.getBean("pants", Pants.class);
     }
 
 
@@ -39,6 +39,6 @@ public class CreateBeanTimeTest {
     public void test3() {
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("ioc/lazy_init/lazy_init.xml");
         //通过id获取容器中的Hat对象，此时才会创建Hat对象
-        Hat hat = applicationContext.getBean("hat", Hat.class);
+        applicationContext.getBean("hat", Hat.class);
     }
 }

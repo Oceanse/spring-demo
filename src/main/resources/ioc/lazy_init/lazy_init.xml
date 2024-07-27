@@ -8,12 +8,11 @@
     <!--
     单例：
     默认情况下，单例bean在创建spring容器（框架）启动时就会被马上创建
-    单例显式设置lazy-init=true， 单例bean在创建spring容器启动时不会被创建，只在使用时候才会被实例化，也就是懒创建
+    单例默认是快加载，只有显式设置lazy-init=true，才是懒加载
 
-    多例：只能是懒创建
+    多例：只能是懒加载
     懒加载机制只对单例bean有作用，对于多例bean设置懒加载没有意义，多例bean只能是懒创建，也就是在使用时候会被创建
     -->
-
 
     <!--单例默认快加载-->
     <bean id="clothes" class="com.demo.ioc.lazy_init.Clothes"></bean>

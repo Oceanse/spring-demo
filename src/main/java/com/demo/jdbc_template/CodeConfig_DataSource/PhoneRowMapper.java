@@ -1,6 +1,6 @@
 package com.demo.jdbc_template.CodeConfig_DataSource;
 
-import com.demo.jdbc_template.dto.Phone;
+import com.demo.jdbc_template.entity.Phone;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
