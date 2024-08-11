@@ -1,5 +1,6 @@
 package com.demo.jpa;
 
+import com.demo.jpa.config.JpaConfig;
 import com.demo.jpa.dao.BookRepository;
 import com.demo.jpa.model.Book;
 import org.junit.Test;
@@ -17,7 +18,8 @@ import java.util.List;
  * ContextConfiguration配置Spring的应用上下文,配置文件通常包含了Spring bean的定义和配置信息
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:jpa/applicationContext.xml")
+//@ContextConfiguration(locations = "classpath:jpa/applicationContext.xml")  //xml文件配置
+ @ContextConfiguration(classes = JpaConfig.class ) //javaconfig配置
 public class JpaTest {
 
     @Autowired
@@ -30,7 +32,7 @@ public class JpaTest {
     @Test
     public void testQuery() {
         List<Book> all = bookRepository.findAll();
-        System.out.println(all);
+        System.out.println("all ================== " + all);
     }
 
     /**

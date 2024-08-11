@@ -30,13 +30,6 @@ public class JPQLTest {
         System.out.println("allBooks = " + allBooks);
     }
 
-    /*
-     * springDataJpa中使用jpql完成 更新/删除操作
-     *   需要手动添加事务的支持
-     *   默认会执行结束之后，回滚事务,  @Rollback(false)不自动回滚
-     * */
-    @Transactional
-    @Rollback(false)
     @Test
     public void testFindBookByTitle(){
         List<Book> allBooks = bookRepository.findBookByTitleWithJPQL("vue");
@@ -44,6 +37,13 @@ public class JPQLTest {
     }
 
 
+    /**
+     * springDataJpa中使用jpql完成 更新/删除操作
+     *   需要手动添加事务的支持
+     *   默认会执行结束之后，回滚事务,  @Rollback(false)不自动回滚
+     * */
+    @Transactional
+    @Rollback(false)
     @Test
     public void testUpdateBook(){
         bookRepository.updateBookWithJPQL(3L,"js");

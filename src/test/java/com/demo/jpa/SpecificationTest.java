@@ -2,6 +2,7 @@ package com.demo.jpa;
 
 import com.demo.jpa.dao.BookRepository;
 import com.demo.jpa.model.Book;
+import com.demo.jpa.service.BookService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,22 +15,12 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.persistence.criteria.*;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * 有时我们在查询某个实体的时候，给定的条件是不固定的，如果一个条件就写一个方法，会出现方法爆炸；
- * 这时就需要动态构建相应的查询语句，在Spring Data JPA中可以通过JpaSpecificationExecutor接口动态构造查询条件。
+ * 这时就需要构根据不同的条件动态灵活地组合查询查询逻辑，在Spring Data JPA中可以通过JpaSpecificationExecutor接口动态构造查询条件。
  * 相比JPQL,其优势是类型安全,更加的面向对象。
- * <p>
- * public interface JpaSpecificationExecutor<T> {
- * Optional<T> findOne(@Nullable Specification<T> var1);
- * List<T> findAll(@Nullable Specification<T> var1);
- * Page<T> findAll(@Nullable Specification<T> var1, Pageable var2);
- * List<T> findAll(@Nullable Specification<T> var1, Sort var2);
- * long count(@Nullable Specification<T> var1);
- * }
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:jpa/applicationContext.xml")
@@ -38,20 +29,23 @@ public class SpecificationTest {
     @Autowired
     BookRepository bookRepository;
 
+    @Autowired
+    BookService bookService;
+
     @Test
     public void testFindByTitle() {
         Specification<Book> specification = new Specification<Book>() {
             /**
              *
-             * @param root 需要比较的属性（path对象）
+             * @param root 代表了查询的实体类的根节点，通常是你查询的目标实体类的实例，在本例中，root 是一个 Book 类型的 Root 对象，因为它指向 Book 实体类
              * @param criteriaQuery 顶层查询对象，自定义查询方式（了解：一般不用）
-             * @param criteriaBuilder 构造查询条件的，内部封装了很多的查询条件（模糊匹配，精准匹配）
+             * @param criteriaBuilder 它是用来构建查询谓词的主要工具，，例如等于 (equal)、大于 (greaterThan)、小于 (lessThan)  and、or、not 等,Hibernate 会在后台自动将这些谓词转换为 JPQL 查询，最终，JPQL 查询会被进一步转换为 SQL 查询语句，并发送给数据库执行。
              * @return
              */
             @Override
             public Predicate toPredicate(Root<Book> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
-                Path<Object> title = root.get("title");//需要比较的属性
-                Predicate predicate = criteriaBuilder.equal(title, "vue");//构造查询条件
+                Path<Object> title = root.get("title");
+                Predicate predicate = criteriaBuilder.equal(title, "vue");//它表示 Book 实体类中的 title 属性是否等于vue;Hibernate 会在后台自动将这些谓词转换为 JPQL 查询，最终，JPQL 查询会被进一步转换为 SQL 查询语句，并发送给数据库执行。
                 return predicate;
             }
         };
@@ -90,7 +84,6 @@ public class SpecificationTest {
         Specification<Book> spec = new Specification<Book>() {
             @Override
             public Predicate toPredicate(Root<Book> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                //查询属性：客户名
                 Path<Object> custName = root.get("title");
                 //查询方式：模糊匹配
                 Predicate like = cb.like(custName.as(String.class), "v%");
@@ -152,7 +145,16 @@ public class SpecificationTest {
         List<Book> content = page.getContent();
         System.out.println("totalElements = " + totalElements);
         System.out.println("content = " + content);
+    }
 
+
+    @Test
+    public void testDynamicQuery(){
+        Map<String,Object> param=new HashMap<>();
+        param.put("title","java");
+        param.put("author","ocean");
+        List<Book> books = bookService.searchBooks(param);
+        System.out.println("books = " + books);
     }
 
 

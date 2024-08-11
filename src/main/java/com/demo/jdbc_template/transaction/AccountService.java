@@ -12,7 +12,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 
-@Service
+//@Service //其他类在加载spring上下文会产生Error creating bean with name 'accountService'，所以这里先注释掉
 public class AccountService {
 
     @Autowired
